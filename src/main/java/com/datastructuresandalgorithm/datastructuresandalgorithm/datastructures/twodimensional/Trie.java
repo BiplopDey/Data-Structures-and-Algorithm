@@ -87,9 +87,8 @@ public class Trie {
     }
 
     private void traverse(Node root) {
-        for (Node node : root.getChildren()) {
+        for (Node node : root.getChildren())
             traverse(node);
-        }
     }
 }
 

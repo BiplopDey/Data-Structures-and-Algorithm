@@ -20,22 +20,19 @@ public class StringManipulations {
     boolean isAnagram(String str1, String str2){
         if(str1 == null || str2 == null)
             return false;
-        Map<Character, Integer> frequencies = new HashMap<>();
+
+        int[] frequencies = new int[256];
         str1 = toLowerCaseAndRemoveSpace(str1);
         str2 = toLowerCaseAndRemoveSpace(str2);
 
         for(var ch : str1.toCharArray())
-            frequencies.put(ch,frequencies.getOrDefault(ch,0)+1);
+           frequencies[ch]++;
 
+        for(var ch : str2.toCharArray())
+            frequencies[ch]--;
 
-        for(var ch : str2.toCharArray()){
-            if(!frequencies.containsKey(ch))
-                return false;
-            frequencies.put(ch,frequencies.get(ch)-1);
-        }
-
-        for(var entry : frequencies.entrySet())
-            if(entry.getValue() != 0)
+        for(var f : frequencies)
+            if(f != 0)
                 return false;
 
         return true;
